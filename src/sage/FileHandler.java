@@ -26,114 +26,62 @@ import java.util.*;
  */
 public class FileHandler {
     
-protected Reader inputStream;
-protected FileProcessData fileProcessData;
+    protected Reader inputStream;
+    protected FileProcessData fileProcessData;
 
-public FileHandler(Reader inputStream, FileProcessData fileProcessData){    
-    this.inputStream=inputStream;
-    this.fileProcessData=fileProcessData;  // only for option 2
-}
+    public FileHandler(Reader inputStream, FileProcessData fileProcessData){    
+        this.inputStream=inputStream;
+        this.fileProcessData=fileProcessData;
+    }
 
-//----------- option 1 -------------------//
-public int getSumOfNumbers() throws IOException{ 
-    int sum=0; 
-    try {             
-        String num="";
-        int c; 
-        boolean end=false;
-        while (!end && (c = inputStream.read()) != -1){
-            while (Character.isDigit(c)) {
-                num+=(char)c;
-                if ((c = inputStream.read()) == -1){
-                    end=true;
-                    break;
-                }
-                sum+=Integer.parseInt(num);
-            }                
-        }
-        return sum;
-    } 
-    catch(IOException | NumberFormatException e){
-        System.err.println("Caught Exception: " +  e.getMessage());
-        return -1;
-    }    
-}
+    public FileProcessData processFile() throws IOException{ 
+        try {             
+            String num="";
+            int charInt;
+            char c; 
+            boolean end=false;
+            while (!end && (charInt = inputStream.read()) != -1){ 
+                c=(char)charInt;
+                fileProcessData.hashMapOperation(c); 
+                num="";
+                while (Character.isDigit(c)) {
+                    num+=c;
+                    if ((charInt = inputStream.read()) == -1){
+                        end=true;
+                        break;
+                    }
+                    else{
+                        c=(char)charInt;                     
+                        fileProcessData.hashMapOperation(c);
 
-public void reset() throws IOException{
-    inputStream.reset();
-}
-
-public HashMap getInstancesOfChars(){ 
-    HashMap<Character,Integer> hm;
-    hm = new HashMap();
-        try {
-            int c;
-            while ((c = inputStream.read()) != -1){
-                char character=(char)c;
-                if(hm.containsKey(character)){
-                    hm.put(character, hm.get(character)+1);
-                }
-                else{
-                    hm.put(character,1);
-                }
+                    }
+                } 
+                if (num !="")
+                    fileProcessData.addition(Integer.parseInt(num));
             }
-            return hm;
-        } 
-        catch(IOException e){
-            System.err.println("Caught Exception: " +  e.getMessage());
-            return hm;
-        }        
-    }
-
-//----------- option 2 -------------------//
-public FileProcessData processFile() throws IOException{ 
-    try {             
-        String num="";
-        int charInt;
-        char c; 
-        boolean end=false;
-        while (!end && (charInt = inputStream.read()) != -1){ 
-            c=(char)charInt;
-            fileProcessData.hashMapOperation(c); 
-            num="";
-            while (Character.isDigit(c)) {
-                num+=c;
-                if ((charInt = inputStream.read()) == -1){
-                    end=true;
-                    break;
-                }
-                else{
-                    c=(char)charInt;                     
-                    fileProcessData.hashMapOperation(c);
-                    
-                }
-            } 
-            if (num !="")
-                fileProcessData.addition(Integer.parseInt(num));
+            return fileProcessData;
         }
+        catch(IOException | NumberFormatException e){
+            System.err.println("Caught Exception: " +  e.getMessage());
+            return fileProcessData;
+        }    
+    }
+
+    public FileProcessData getFileProcessData(){
         return fileProcessData;
     }
-    catch(IOException | NumberFormatException e){
-        System.err.println("Caught Exception: " +  e.getMessage());
-        return fileProcessData;
-    }    
-}
 
-public FileProcessData getFileProcessData(){
-    return fileProcessData;
-}
+    public void setFileProcessData(FileProcessData fileProcessData){
+        this.fileProcessData=fileProcessData;
+    }
 
-public void setFileProcessData(FileProcessData fileProcessData){
-    this.fileProcessData=fileProcessData;
-}
+    public Reader getInputStream(){
+        return inputStream;
+    }
 
-public Reader getInputStream(){
-    return inputStream;
-}
-
-public void setInputStream(Reader inputStream){
-    this.inputStream=inputStream;
-}
+    public void setInputStream(Reader inputStream){
+        this.inputStream=inputStream;
+    }
 
 }
 
