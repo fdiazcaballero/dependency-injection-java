@@ -16,6 +16,14 @@
  */
 package sage;
 
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.*;
+
 /**
  *
  * @author fernando.caballero
@@ -38,11 +46,33 @@ public class FileProcessing {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+        FileReader fileReader = null;
+        try {
+            String fileName;
+            Scanner in = new Scanner(System.in);
+            System.out.println("Enter the name of a file in the current directory:");
+            fileName = in.nextLine();
+            fileReader = new FileReader(fileName);            
+            FileProcessData fileProcessData=new FileProcessData();
+            
+            FileHandler fh=new FileHandler(fileReader, fileProcessData);
+            FileProcessData fileProcessDataOutput=fh.processFile();
+            System.out.println(fileProcessDataOutput.getSum());
+            // TODO code application logic here
 //        if (inputStream != null) {
 //            inputStream.close();
 //        } 
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileProcessing.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileProcessing.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                fileReader.close();
+            } catch (IOException ex) {
+                Logger.getLogger(FileProcessing.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
 }

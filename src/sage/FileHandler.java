@@ -89,21 +89,30 @@ public HashMap getInstancesOfChars(){
 public FileProcessData processFile() throws IOException{ 
     try {             
         String num="";
-        int c; 
+        int charInt;
+        char c; 
         boolean end=false;
-        while (!end && (c = inputStream.read()) != -1){                       
-            fileProcessData.hashMapOperation((char)c);            
+        while (!end && (charInt = inputStream.read()) != -1){ 
+            c=(char)charInt;
+            fileProcessData.hashMapOperation(c); 
+            num="";
             while (Character.isDigit(c)) {
-                num+=(char)c;
-                if ((c = inputStream.read()) == -1){
+                num+=c;
+                if ((charInt = inputStream.read()) == -1){
                     end=true;
                     break;
                 }
+                else{
+                    c=(char)charInt;                     
+                    fileProcessData.hashMapOperation(c);
+                    
+                }
+            } 
+            if (num !="")
                 fileProcessData.addition(Integer.parseInt(num));
-            }                
         }
         return fileProcessData;
-    } 
+    }
     catch(IOException | NumberFormatException e){
         System.err.println("Caught Exception: " +  e.getMessage());
         return fileProcessData;
