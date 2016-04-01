@@ -16,6 +16,7 @@
  */
 package service;
 
+import main.FileProcessData;
 import java.io.IOException;
 import java.io.Reader;
 
@@ -25,6 +26,6 @@ import java.io.Reader;
  */
 public interface FileService {
     
-    FileProcessData processFile(Reader inputStream, FileProcessData fileProcessData) throws IOException;
+    FileProcessData processFile(Reader inputStream) throws IOException;
     
 }

@@ -16,6 +16,7 @@
  */
 package service;
 
+import main.FileProcessData;
 import java.io.Reader;
 import java.io.IOException;
 import java.util.*;
@@ -40,8 +41,9 @@ public class FileHandler implements FileService{
     }
 
     @Override
-    public FileProcessData processFile(Reader inputStream, FileProcessData fileProcessData) throws IOException{ 
+    public FileProcessData processFile(Reader inputStream) throws IOException{ 
         try {
+            FileProcessData fileProcessData=new FileProcessData();
             this.inputStream=inputStream;
             this.fileProcessData=fileProcessData;
             String num;

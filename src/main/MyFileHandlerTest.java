@@ -24,7 +24,6 @@ import java.io.FileReader;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import service.FileProcessData;
 
 /**
  *
@@ -39,13 +38,14 @@ public class MyFileHandlerTest {
             Scanner in = new Scanner(System.in);
             System.out.println("Enter the name of a file (the file must be in the Sage folder):");
             String fileName = in.nextLine();
-            FileReader fileReader = new FileReader(fileName);
-            FileProcessData fileProcessData=new FileProcessData();
+            
             
             ServiceInjector injector =  new FileServiceInjector();
             FileConsumer app = injector.getConsumer();
-                        
-            app.writeOutputFile(fileReader, fileProcessData);
+            
+            FileReader fileReader = new FileReader(fileName);
+//            FileProcessData fileProcessData=new FileProcessData();
+            app.writeOutputFile(app.processFile(fileReader));
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MyFileHandlerTest.class.getName()).log(Level.SEVERE, null, ex);

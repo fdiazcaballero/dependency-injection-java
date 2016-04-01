@@ -23,7 +23,7 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import service.FileProcessData;
+import main.FileProcessData;
 import service.FileService;
 
 /**
@@ -41,12 +41,21 @@ public class OutputConsumerApp implements FileConsumer{
     /**
      * 
      * @param inputStream
-     * @param fileProcessData
      */
     @Override
-    public void writeOutputFile(Reader inputStream, FileProcessData fileProcessData) {
+    public FileProcessData processFile(Reader inputStream) {
         try {          
-            FileProcessData result=this.service.processFile(inputStream,fileProcessData);
+            return this.service.processFile(inputStream);
+                        
+        } catch (IOException ex) {
+            Logger.getLogger(OutputConsumerApp.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    @Override
+    public void writeOutputFile(FileProcessData result){
+        try {
             File file = new File("Output.txt");
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
