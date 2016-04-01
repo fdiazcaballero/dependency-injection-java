@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package sage;
+package service;
 
 import java.io.Reader;
 import java.io.IOException;
@@ -24,19 +24,27 @@ import java.util.*;
  *
  * @author fernando.caballero
  */
-public class FileHandler {
+public class FileHandler implements FileService{
     
-    protected Reader inputStream;
-    protected FileProcessData fileProcessData;
+    private Reader inputStream;
+    private FileProcessData fileProcessData;
 
-    public FileHandler(Reader inputStream, FileProcessData fileProcessData){    
-        this.inputStream=inputStream;
-        this.fileProcessData=fileProcessData;
+//    public FileHandler(Reader inputStream, FileProcessData fileProcessData){    
+//        this.inputStream=inputStream;
+//        this.fileProcessData=fileProcessData;
+//    }
+    
+    public FileHandler(){    
+        this.inputStream=null;
+        this.fileProcessData=null;
     }
 
-    public FileProcessData processFile() throws IOException{ 
-        try {             
-            String num="";
+    @Override
+    public FileProcessData processFile(Reader inputStream, FileProcessData fileProcessData) throws IOException{ 
+        try {
+            this.inputStream=inputStream;
+            this.fileProcessData=fileProcessData;
+            String num;
             int charInt;
             char c; 
             boolean end=false;
@@ -67,21 +75,21 @@ public class FileHandler {
         }    
     }
 
-    public FileProcessData getFileProcessData(){
-        return fileProcessData;
-    }
-
-    public void setFileProcessData(FileProcessData fileProcessData){
-        this.fileProcessData=fileProcessData;
-    }
-
-    public Reader getInputStream(){
-        return inputStream;
-    }
-
-    public void setInputStream(Reader inputStream){
-        this.inputStream=inputStream;
-    }
+//    public FileProcessData getFileProcessData(){
+//        return fileProcessData;
+//    }
+//
+//    public void setFileProcessData(FileProcessData fileProcessData){
+//        this.fileProcessData=fileProcessData;
+//    }
+//
+//    public Reader getInputStream(){
+//        return inputStream;
+//    }
+//
+//    public void setInputStream(Reader inputStream){
+//        this.inputStream=inputStream;
+//    }
 
 }
 
