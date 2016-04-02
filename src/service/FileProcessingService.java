@@ -16,7 +16,9 @@
  */
 package service;
 
-import main.FileProcessData;
+import main.FileProcessingData;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.Reader;
 import java.io.IOException;
 import java.util.*;
@@ -25,27 +27,14 @@ import java.util.*;
  *
  * @author fernando.caballero
  */
-public class FileHandler implements FileService{
+public class FileProcessingService implements FileService{
     
-    private Reader inputStream;
-    private FileProcessData fileProcessData;
-
-//    public FileHandler(Reader inputStream, FileProcessData fileProcessData){    
-//        this.inputStream=inputStream;
-//        this.fileProcessData=fileProcessData;
-//    }
-    
-    public FileHandler(){    
-        this.inputStream=null;
-        this.fileProcessData=null;
-    }
+    public FileProcessingService(){}
 
     @Override
-    public FileProcessData processFile(Reader inputStream) throws IOException{ 
+    public FileProcessingData processFile(Reader inputStream){ 
         try {
-            FileProcessData fileProcessData=new FileProcessData();
-            this.inputStream=inputStream;
-            this.fileProcessData=fileProcessData;
+            FileProcessingData fileProcessData=new FileProcessingData();
             String num;
             int charInt;
             char c; 
@@ -63,35 +52,30 @@ public class FileHandler implements FileService{
                     else{
                         c=(char)charInt;                     
                         fileProcessData.hashMapOperation(c);
-
                     }
                 } 
-                if (num !="")
+                if (!"".equals(num))
                     fileProcessData.addition(Integer.parseInt(num));
+            }            
+            File file = new File("Output.txt");
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            HashMap<Character,Integer> hm=fileProcessData.getHashMap();
+            writer.write("total="+fileProcessData.getSum()+"\r\n");            
+            for(Character key: hm.keySet()){
+                writer.write("Character ["+key+"] occurs:"+hm.get(key)+"\r\n");
             }
+            writer.flush();
+            writer.close(); 
+            
             return fileProcessData;
         }
         catch(IOException | NumberFormatException e){
             System.err.println("Caught Exception: " +  e.getMessage());
-            return fileProcessData;
+            return null;
         }    
     }
 
-//    public FileProcessData getFileProcessData(){
-//        return fileProcessData;
-//    }
-//
-//    public void setFileProcessData(FileProcessData fileProcessData){
-//        this.fileProcessData=fileProcessData;
-//    }
-//
-//    public Reader getInputStream(){
-//        return inputStream;
-//    }
-//
-//    public void setInputStream(Reader inputStream){
-//        this.inputStream=inputStream;
-//    }
 
 }
 

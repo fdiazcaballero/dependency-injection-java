@@ -37,15 +37,14 @@ public class MyFileHandlerTest {
             
             Scanner in = new Scanner(System.in);
             System.out.println("Enter the name of a file (the file must be in the Sage folder):");
-            String fileName = in.nextLine();
-            
+            String fileName = in.nextLine();            
             
             ServiceInjector injector =  new FileServiceInjector();
             FileConsumer app = injector.getConsumer();
             
             FileReader fileReader = new FileReader(fileName);
 //            FileProcessData fileProcessData=new FileProcessData();
-            app.writeOutputFile(app.processFile(fileReader));
+            app.processFile(fileReader);
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MyFileHandlerTest.class.getName()).log(Level.SEVERE, null, ex);

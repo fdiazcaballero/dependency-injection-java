@@ -17,7 +17,7 @@
 package consumer;
 
 import java.io.Reader;
-import main.FileProcessData;
+import main.FileProcessingData;
 
 /**
  *
@@ -28,11 +28,8 @@ public interface FileConsumer {
     /**
      *
      * @param inputStream
-     * @param fileProcessData
      * @return 
      */
-    FileProcessData processFile(Reader inputStream);
-    
-    void writeOutputFile(FileProcessData result);
-    
+    FileProcessingData processFile(Reader inputStream);
+        
 }

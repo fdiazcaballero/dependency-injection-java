@@ -16,14 +16,11 @@
  */
 package consumer;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import main.FileProcessData;
+import main.FileProcessingData;
 import service.FileService;
 
 /**
@@ -43,32 +40,12 @@ public class OutputConsumerApp implements FileConsumer{
      * @param inputStream
      */
     @Override
-    public FileProcessData processFile(Reader inputStream) {
-        try {          
+    public FileProcessingData processFile(Reader inputStream) {                  
+        try {
             return this.service.processFile(inputStream);
-                        
         } catch (IOException ex) {
             Logger.getLogger(OutputConsumerApp.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
-    }
-    
-    @Override
-    public void writeOutputFile(FileProcessData result){
-        try {
-            File file = new File("Output.txt");
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            HashMap<Character,Integer> hm=result.getHashMap();
-            writer.write("total="+result.getSum()+"\r\n");
-            
-            for(Character key: hm.keySet()){
-                writer.write("Character ["+key+"] occurs:"+hm.get(key)+"\r\n");
-            }
-            writer.flush();
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(OutputConsumerApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    }    
 }

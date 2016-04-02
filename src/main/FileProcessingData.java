@@ -22,11 +22,11 @@ import java.util.*;
  *
  * @author fernando.caballero
  */
-public class FileProcessData {
+public class FileProcessingData {
     private int sum;
     private HashMap<Character,Integer> hm;
     
-    public FileProcessData(){
+    public FileProcessingData(){
         sum=0;
         hm = new HashMap();        
     }
