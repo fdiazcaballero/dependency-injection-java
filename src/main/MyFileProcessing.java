@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  *
  * @author fernando.caballero
  */
-public class MyFileHandlerTest {
+public class MyFileProcessing {
     
     public static void main(String[] args) {
         
@@ -43,11 +43,11 @@ public class MyFileHandlerTest {
             FileConsumer app = injector.getConsumer();
             
             FileReader fileReader = new FileReader(fileName);
-//            FileProcessData fileProcessData=new FileProcessData();
             app.processFile(fileReader);
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MyFileHandlerTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MyFileProcessing.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Caught Exception: " +  ex.getMessage());
         }
     }
     

@@ -16,12 +16,13 @@
  */
 package service;
 
-import main.FileProcessingData;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Reader;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,16 +33,17 @@ public class FileProcessingService implements FileService{
     public FileProcessingService(){}
 
     @Override
-    public FileProcessingData processFile(Reader inputStream){ 
+    public HashMap processFile(Reader inputStream){ 
         try {
-            FileProcessingData fileProcessData=new FileProcessingData();
+            HashMap hm=new HashMap();
+            hm.put("total",0);
             String num;
             int charInt;
             char c; 
             boolean end=false;
             while (!end && (charInt = inputStream.read()) != -1){ 
                 c=(char)charInt;
-                fileProcessData.hashMapOperation(c); 
+                hm.put(c, hm.containsKey(c) ? (Integer)hm.get(c)+1 : 1);
                 num="";
                 while (Character.isDigit(c)) {
                     num+=c;
@@ -51,32 +53,31 @@ public class FileProcessingService implements FileService{
                     }
                     else{
                         c=(char)charInt;                     
-                        fileProcessData.hashMapOperation(c);
+                        hm.put(c, hm.containsKey(c) ? (Integer)hm.get(c)+1 : 1);
                     }
                 } 
                 if (!"".equals(num))
-                    fileProcessData.addition(Integer.parseInt(num));
+                    hm.put("total", (Integer) hm.get("total")+Integer.parseInt(num));
             }            
             File file = new File("Output.txt");
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
-            HashMap<Character,Integer> hm=fileProcessData.getHashMap();
-            writer.write("total="+fileProcessData.getSum()+"\r\n");            
-            for(Character key: hm.keySet()){
-                writer.write("Character ["+key+"] occurs:"+hm.get(key)+"\r\n");
+            writer.write("total="+hm.get("total")+"\r\n");            
+            for(Object key: hm.keySet()){
+                if(!key.equals("total"))
+                    writer.write("Character ["+(Character)key+"] occurs:"+hm.get(key)+"\r\n");
             }
             writer.flush();
             writer.close(); 
-            
-            return fileProcessData;
+
+            return hm;  
         }
-        catch(IOException | NumberFormatException e){
-            System.err.println("Caught Exception: " +  e.getMessage());
+        catch(IOException | NumberFormatException ex){
+            Logger.getLogger(FileProcessingService.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Caught Exception: " +  ex.getMessage());
             return null;
         }    
     }
-
-
 }
 
 

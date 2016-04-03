@@ -17,7 +17,7 @@
 package injector;
 
 import consumer.FileConsumer;
-import consumer.OutputConsumerApp;
+import consumer.FileProcessingConsumer;
 import service.FileProcessingService;
 
 /**
@@ -28,7 +28,7 @@ public class FileServiceInjector implements ServiceInjector{
     
     @Override
     public FileConsumer getConsumer() {
-        return new OutputConsumerApp(new FileProcessingService());
+        return new FileProcessingConsumer(new FileProcessingService());
     }
     
 }

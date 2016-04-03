@@ -17,7 +17,7 @@
 package consumer;
 
 import java.io.Reader;
-import main.FileProcessingData;
+import java.util.HashMap;
 
 /**
  *
@@ -30,6 +30,6 @@ public interface FileConsumer {
      * @param inputStream
      * @return 
      */
-    FileProcessingData processFile(Reader inputStream);
+    HashMap processFile(Reader inputStream);
         
 }

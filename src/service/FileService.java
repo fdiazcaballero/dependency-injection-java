@@ -16,9 +16,9 @@
  */
 package service;
 
-import main.FileProcessingData;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 
 /**
  *
@@ -26,6 +26,6 @@ import java.io.Reader;
  */
 public interface FileService {
     
-    FileProcessingData processFile(Reader inputStream) throws IOException;
+    HashMap processFile(Reader inputStream) throws IOException;
     
 }

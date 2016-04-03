@@ -16,13 +16,13 @@
  */
 package service;
 
-import main.FileProcessingData;
 import consumer.FileConsumer;
-import consumer.OutputConsumerApp;
+import consumer.FileProcessingConsumer;
 import injector.ServiceInjector;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.HashMap;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,41 +46,42 @@ public class FileProcessingServiceTest {
             @Override
             public FileConsumer getConsumer() {
                 //mock the message service
-                return new OutputConsumerApp(new FileProcessingService() {                     
+                return new FileProcessingConsumer(new FileProcessingService() {                     
                     @Override
-                    public FileProcessingData processFile(Reader inputStream){ 
-                            try {
-                                FileProcessingData fileProcessData=new FileProcessingData();
-                                String num;
-                                int charInt;
-                                char c; 
-                                boolean end=false;
-                                while (!end && (charInt = inputStream.read()) != -1){ 
-                                    c=(char)charInt;
-                                    fileProcessData.hashMapOperation(c); 
-                                    num="";
-                                    while (Character.isDigit(c)) {
-                                        num+=c;
-                                        if ((charInt = inputStream.read()) == -1){
-                                            end=true;
-                                            break;
-                                        }
-                                        else{
-                                            c=(char)charInt;                     
-                                            fileProcessData.hashMapOperation(c);
-                                        }
-                                    } 
-                                    if (!"".equals(num))
-                                        fileProcessData.addition(Integer.parseInt(num));
-                                }          
-                                return fileProcessData;
-                            }
-                            catch(IOException | NumberFormatException e){
-                                System.err.println("Caught Exception: " +  e.getMessage());
-                                return null;
-                            }    
-                        }
-                    });
+                    public HashMap processFile(Reader inputStream){ 
+                        try {
+                            HashMap hm=new HashMap();
+                            hm.put("total",0);
+                            String num;
+                            int charInt;
+                            char c; 
+                            boolean end=false;
+                            while (!end && (charInt = inputStream.read()) != -1){ 
+                                c=(char)charInt;
+                                hm.put(c, hm.containsKey(c) ? (Integer)hm.get(c)+1 : 1);
+                                num="";
+                                while (Character.isDigit(c)) {
+                                    num+=c;
+                                    if ((charInt = inputStream.read()) == -1){
+                                        end=true;
+                                        break;
+                                    }
+                                    else{
+                                        c=(char)charInt;                     
+                                        hm.put(c, hm.containsKey(c) ? (Integer)hm.get(c)+1 : 1);
+                                    }
+                                } 
+                                if (!"".equals(num))
+                                    hm.put("total", (Integer) hm.get("total")+Integer.parseInt(num));
+                            }            
+                            return hm;  
+                           }
+                        catch(IOException | NumberFormatException e){
+                            System.err.println("Caught Exception: " +  e.getMessage());
+                            return null;
+                        }    
+                    }
+                });
             }
         };
     }
@@ -100,8 +101,8 @@ public class FileProcessingServiceTest {
         String str="aasdfff8jdkjf9";        
         StringReader mock=new StringReader(str);  
         FileConsumer consumer = injector.getConsumer();
-        FileProcessingData result = consumer.processFile(mock);
-        assertEquals(17, result.getSum());
+        HashMap result = consumer.processFile(mock);
+        assertEquals(17, result.get("total"));
     }
     
 }

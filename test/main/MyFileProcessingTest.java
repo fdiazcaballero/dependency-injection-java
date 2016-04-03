@@ -16,47 +16,47 @@
  */
 package main;
 
-import java.util.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author fernando.caballero
  */
-public class FileProcessingData {
-    private int sum;
-    private HashMap<Character,Integer> hm;
+public class MyFileProcessingTest {
     
-    public FileProcessingData(){
-        sum=0;
-        hm = new HashMap();        
+    public MyFileProcessingTest() {
     }
     
-    public int getSum(){
-        return sum;
+    @BeforeClass
+    public static void setUpClass() {
     }
     
-    public void setSum(int sum){
-        this.sum=sum;
-    }
-    public void addition(int number){
-        sum+=number;
+    @AfterClass
+    public static void tearDownClass() {
     }
     
-    public HashMap<Character,Integer> getHashMap(){
-        return hm;
+    @Before
+    public void setUp() {
     }
     
-    public void setHashMap(HashMap<Character,Integer> hm){
-        this.hm=hm;
+    @After
+    public void tearDown() {
     }
-    
-    public void hashMapOperation(char c){        
-        if(hm.containsKey(c)){
-            hm.put(c, hm.get(c)+1);
-        }
-        else{
-            hm.put(c,1);
-        }
+
+    /**
+     * Test of main method, of class MyFileProcessing.
+     */
+    @Test
+    public void testMain() {
+        System.out.println("main");
+        String[] args = null;
+        MyFileProcessing.main(args);
+        // TODO review the generated test code and remove the default call to fail.
     }
     
 }
