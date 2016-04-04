@@ -14,6 +14,7 @@ This project contains the solution for the Sage test. As a review the project sh
 - Develop tests or advise a test strategy to adequately test the developed code.  
 
 I followed the design pattern of Dependency Injection. The injection is performed in the constructor of the Client class which receives the Service as argument.  
+  
 This project has been developed using NetBeans IDE 8.1.
 
 My code can be found in the /src/ folder. My tests can be found in the /test/ folder.
