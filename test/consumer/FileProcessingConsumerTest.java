@@ -22,31 +22,34 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.HashMap;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import service.FileProcessingService;
 
 /**
  *
+ * Test class for the class FileProcessingConsumer. Using JUnit 4.
+ * 
  * @author fernando.caballero
  */
 public class FileProcessingConsumerTest {
-    
- private ServiceInjector injector;
+ 
+    /**
+     * an injector that will be mocked.
+     */
+    private ServiceInjector injector;
     
     public FileProcessingConsumerTest() {
     }
     
     @Before
     public void setUp() {
-        //mock the injector with anonymous class
+        //the injector is mocked with anonymous class
         injector = new ServiceInjector() {            
             @Override
             public FileConsumer getConsumer() {
-                //mock the message service
+                //mock the message service to avoid creating output files in each test
                 return new FileProcessingConsumer(new FileProcessingService() {                     
                     @Override
                     public HashMap processFile(Reader inputStream){ 
@@ -97,12 +100,25 @@ public class FileProcessingConsumerTest {
      */
     @Test
     public void testProcessFile_Addition_10() {
-        System.out.println("processFile");
+        System.out.println("testProcessFile_Addition_10");
         String str="aasdfff1jdkjf9";        
         StringReader mock=new StringReader(str);  
         FileConsumer consumer = injector.getConsumer();
         HashMap result = consumer.processFile(mock);
         assertEquals(10, result.get("total"));
+    }
+    
+    /**
+     * Test of processFile method, of class FileProcessingService.
+     */
+    @Test
+    public void testProcessFile_NumberOfAppearances_5() {
+        System.out.println("testProcessFile_NumberOfAppearances_5");
+        String str="aasdfff1jdkjf9f";        
+        StringReader mock=new StringReader(str);  
+        FileConsumer consumer = injector.getConsumer();
+        HashMap result = consumer.processFile(mock);
+        assertEquals(5, result.get('f'));
     }
     
 }

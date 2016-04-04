@@ -27,6 +27,8 @@ import static org.junit.Assert.*;
 
 /**
  *
+ * Test class for the class FileProcessingService. Using JUnit 4.
+ * 
  * @author fernando.caballero
  */
 public class FileProcessingServiceTest {
@@ -38,7 +40,7 @@ public class FileProcessingServiceTest {
     
     @Before
     public void setUp() {
-        //mock the message service
+        //mock the message service to avoid creating output files in each test
         instance = new FileProcessingService() {                     
             @Override
             public HashMap processFile(Reader inputStream){ 

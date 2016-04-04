@@ -22,10 +22,20 @@ import service.FileProcessingService;
 
 /**
  *
+ * Implementation of the ServiceInjector interface.
+ * 
  * @author fernando.caballero
  */
 public class FileServiceInjector implements ServiceInjector{
     
+    /**
+     * 
+     * Method that returns instance of the consumer. It creates the consumer object
+     * using its constructor and passing to it an instance of the Service as parameter.
+     * In the consumer constructor the service parameter will be injected.
+     * 
+     * @return FileConsumer object
+     */
     @Override
     public FileConsumer getConsumer() {
         return new FileProcessingConsumer(new FileProcessingService());

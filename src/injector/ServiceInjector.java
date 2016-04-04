@@ -20,10 +20,16 @@ import consumer.FileConsumer;
 
 /**
  *
+ * Interface for the Injector
+ * 
  * @author fernando.caballero
  */
 public interface ServiceInjector {
     
+    /**
+     * 
+     * @return FileConsumer object
+     */
     public FileConsumer getConsumer();
     
 }

@@ -21,14 +21,16 @@ import java.util.HashMap;
 
 /**
  *
+ * Interface for the consumer
+ * 
  * @author fernando.caballero
  */
 public interface FileConsumer {
     
     /**
      *
-     * @param inputStream
-     * @return 
+     * @param inputStream class Reader
+     * @return HashMap containing the result of the process operation.
      */
     HashMap processFile(Reader inputStream);
         

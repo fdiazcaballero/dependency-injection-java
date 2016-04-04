@@ -21,11 +21,19 @@ import java.io.Reader;
 import java.util.HashMap;
 
 /**
- *
+ * 
+ * Interface for the Service
+ * 
  * @author fernando.caballero
  */
 public interface FileService {
     
+    /**
+     * 
+     * @param inputStream
+     * @return
+     * @throws IOException 
+     */
     HashMap processFile(Reader inputStream) throws IOException;
     
 }

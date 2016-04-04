@@ -31,6 +31,14 @@ import java.util.logging.Logger;
  */
 public class MyFileProcessing {
     
+    /**
+     * Main method. It asks for the name of a file that needs to be entered through
+     * the standard input and then press enter.
+     * 
+     * The location of the file needs to be the Sage folder.
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
         
         try {            

@@ -31,7 +31,25 @@ import java.util.logging.Logger;
 public class FileProcessingService implements FileService{
     
     public FileProcessingService(){}
-
+    
+    /**
+     * 
+     * This method receives Reader object consisting of a sequence of ASCII characters.
+     * 
+     * It considers that a sequence of one or more digits followed by a non-digit represents a decimal integer.
+     * 
+     * It is assumed that there are no negative numbers in the stream.
+     * 
+     * It adds all the numbers in the stream, and write the total in a HashMap entry with key "total".
+     * 
+     * It counts how many times each ASCII character occurs in the stream, and include a HashMap entry
+     * per character with key the corresponding character and value the number of appearances.
+     * 
+     * It writes the aforementioned HashMap into a file named "Output.txt".
+     * 
+     * @param inputStream Reader class
+     * @return 
+     */
     @Override
     public HashMap processFile(Reader inputStream){ 
         try {

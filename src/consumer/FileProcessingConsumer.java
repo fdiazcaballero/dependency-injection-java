@@ -24,20 +24,30 @@ import java.util.logging.Logger;
 import service.FileService;
 
 /**
- *
+ * 
+ * Implementation of the FileConsumer interface
+ * 
  * @author fernando.caballero
  */
 public class FileProcessingConsumer implements FileConsumer{
     
     private FileService service;
     
+    /**
+     * Constructor for FileProcessingConsumer class.
+     * 
+     * The injection of the service is performed here.
+     * 
+     * @param service FileService object that is injected. 
+     */
     public FileProcessingConsumer(FileService service){
-        this.service=service;
+        this.service=service; //injection
     }    
     
     /**
      * 
-     * @param inputStream
+     * @param inputStream class Reader
+     * @return HashMap containing the result of the process operation.
      */
     @Override
     public HashMap processFile(Reader inputStream) {                
