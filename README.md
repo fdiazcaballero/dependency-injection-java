@@ -1,7 +1,7 @@
 ## Synopsis
 
 This project contains the solution for the Sage test. As a review the project should solve the following:  
-1. A file consists of a sequence of ASCII characters.  
+- A file consists of a sequence of ASCII characters.  
                A sequence of one or more digits followed by a non-digit represents a decimal integer.  
                The file includes no negative numbers.  
                Write a program to  
@@ -11,10 +11,12 @@ This project contains the solution for the Sage test. As a review the project sh
                You may assume that the sum of the numbers will not exceed the maximum value of an integer.  
                A sample input file and a valid output file are attached.  
  
-2. Develop tests or advise a test strategy to adequately test the developed code.  
+- Develop tests or advise a test strategy to adequately test the developed code.  
 
-I followed the design pattern of Dependency Injection. The injection is performed in the constructor of the Client class which received the Service as argument.  
+I followed the design pattern of Dependency Injection. The injection is performed in the constructor of the Client class which receives the Service as argument.  
 This project has been developed using NetBeans IDE 8.1.
+
+My code can be found in the /src/ folder. My tests can be found in the /test/ folder.
 
 ## How to run
 
