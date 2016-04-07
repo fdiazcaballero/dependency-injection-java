@@ -1,6 +1,6 @@
 ## Synopsis
 
-This project contains the solution for the Sage test. As a review the project should solve the following:  
+This project contains an example of dependency injection implemented in Java. As a review the project solves the following:  
 - A file consists of a sequence of ASCII characters.  
                A sequence of one or more digits followed by a non-digit represents a decimal integer.  
                The file includes no negative numbers.  
@@ -21,8 +21,8 @@ My code can be found in the /src/ folder. My tests can be found in the /test/ fo
 
 ## How to run
 
-Please place your input files in the main Sage folder. Then run the project, in the standard ouput you'll receive a message to provide your file name. Please type the name and press ENTER.  
-A file named Output.txt will be generated in the same folder (Sage folder) containing the result.
+Please place your input files in the main folder. Then run the project, in the standard ouput you'll receive a message to provide your file name. Please type the name and press ENTER.  
+A file named Output.txt will be generated in the same folder containing the result.
 
 ## API Reference
 
